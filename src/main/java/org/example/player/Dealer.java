@@ -4,39 +4,31 @@ import org.example.card.Card;
 import org.example.deck.Deck;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Dealer {
     private final String dealer = "Dealer";
     private ArrayList<Player> currentPlayers = new ArrayList<>();
     private final Deck dealerDeck = new Deck();
 
-    public  Dealer(){
-//        dealerDeck.setDeck();
-    }
+    public  Dealer(){}
     public void shuffle(){
         dealerDeck.shuffleCards();
     }
 
-    public ArrayList<Card> getDealerDeck() {
+    public Stack<Card> getDealerDeck() {
         return dealerDeck.getDeck();
     }
 
-//    public ArrayList<Card> dealCards(int numberOfCards){
-//        ArrayList<Card> cards = new ArrayList<>();
-//        for(int i =0; i < numberOfCards; i++){
-//            cards.add(dealerDeck.getDeck().get(i));
-//        }
-//        return  cards;
-//    }
     public void addPlayer(Player newPlayer){
         this.currentPlayers.add(newPlayer);
     }
      public void removePlayer(Player player){
-        currentPlayers.remove(player);
+        this.currentPlayers.remove(player);
      }
 
     public ArrayList<Player> getCurrentPlayers() {
-        return currentPlayers;
+        return this.currentPlayers;
     }
 
     public void handCards(int numOfCards){
@@ -44,16 +36,16 @@ public class Dealer {
         for(Player player: currentPlayers){
             ArrayList<Card> deal = new ArrayList<>();
             for(int i =0; i < numOfCards; i++){
-                Card topCard = dealerDeck.getDeck().get(0);
+                Card topCard = dealerDeck.getDeck().pop();
                 deal.add(topCard);
-               // System.out.println("deal printing from dealer " + deal.get(0));
-                dealerDeck.removeFromDeck(topCard);
             }
             player.setHandOfCards(deal);
         }
-
     }
 
+    public void handACard (Player player){
+        player.updateHandOfCards(dealerDeck.getDeck().pop());
+    }
 
     @Override
     public String toString() {

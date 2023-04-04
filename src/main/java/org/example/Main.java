@@ -53,7 +53,7 @@ public class Main {
             System.out.println( player1.getHandOfCards());
         }
 
-        //player.setHandOfCards(deck.getDeck());
+//        player.setHandOfCards(deck.getDeck());
 
 
 //        Card card1 = new Card(Suit.CLUBS, Value.TWO);

@@ -5,12 +5,13 @@ import org.example.card.Suit;
 import org.example.card.Value;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Deck {
-   private ArrayList<Card> deck;
+   private Stack<Card> deck;
 
    public Deck(){
-       this.deck = new ArrayList<>();
+       this.deck = new Stack<>();
        setDeck();
    }
 
@@ -21,14 +22,10 @@ public class Deck {
             }
         }
    }
-    public ArrayList<Card> getDeck() {
+    public Stack<Card> getDeck() {
         return deck;
     }
 
-    public void removeFromDeck(Card card){
-       this.deck.remove(card);
-//       System.out.println(card);
-    }
     public void shuffleCards(){
        int random1;
        int random2;

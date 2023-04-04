@@ -1,6 +1,7 @@
 package org.example.player;
 
 import org.example.card.Card;
+import org.example.game.Strategy;
 
 import java.util.ArrayList;
 
@@ -24,18 +25,41 @@ public class Player {
 
     public void setHandOfCards(ArrayList<Card> handOfCards) {
         this.handOfCards = handOfCards;
+        calcValueOfCards();
+    }
+
+    public int getValueOfCards() {
+        return valueOfCards;
+    }
+
+    public void updateHandOfCards(Card card){
+        this.handOfCards.add(card);
+        calcValueOfCards();
     }
 
     public ArrayList<Card> getHandOfCards() {
-        return handOfCards;
+        return this.handOfCards;
     }
 
     public int calcValueOfCards(){
+        this.valueOfCards = 0;
         for(Card card: handOfCards){
-            valueOfCards += card.getValue().getIntValue();
+            this.valueOfCards += card.getValue().getIntValue();
         }
         return valueOfCards;
     }
+
+
+    public boolean checkHit() {
+        return this.getValueOfCards() <= Strategy.HIT.getLimit();
+    }
+    public boolean checkStick() {
+        return this.getValueOfCards() >= Strategy.STICK.getLimit() && this.getValueOfCards() <= Strategy.GO_BUST.getLimit();
+    }
+    public boolean checkGoBust() {
+        return this.getValueOfCards() > Strategy.GO_BUST.getLimit();
+    }
+
 
     @Override
     public String toString() {
